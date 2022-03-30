@@ -1,0 +1,26 @@
+{
+    "name": "bbldn/sqrs",
+    "description": "SQRS implementation",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "doctrine/annotations": "^1.13",
+        "symfony/http-kernel": "^5.4",
+        "symfony/dependency-injection": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "BBLDN\\CQRS\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Boris Bobol",
+            "email": "bobol.boris@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "vimeo/psalm": "^4.22"
+    }
+}
