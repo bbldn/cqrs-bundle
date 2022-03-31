@@ -1,2 +1,2 @@
-# bbldn-sqrs
+# bbldn-cqrs
 Implementation of SQRS.
