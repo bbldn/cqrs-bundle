@@ -1,5 +1,5 @@
 {
-    "name": "bbldn/sqrs",
+    "name": "bbldn/cqrs",
     "description": "SQRS implementation",
     "type": "library",
     "license": "MIT",
