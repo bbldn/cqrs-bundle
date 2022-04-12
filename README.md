@@ -1,2 +1,2 @@
-# bbldn-sqrs
-Implementation of SQRS.
+# bbldn-cqrs
+Implementation of CQRS.
