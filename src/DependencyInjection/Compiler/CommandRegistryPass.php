@@ -65,6 +65,6 @@ class CommandRegistryPass implements CompilerPass
         $definition->setArgument(0, $commandClassMap);
 
         $container->setDefinition(CommandRegistry::class, $definition);
-        $container->setAlias(CommandRegistry::class, $this->context->getCommandRegistryTag());
+        $container->setAlias($this->context->getCommandRegistryTag(), CommandRegistry::class);
     }
 }

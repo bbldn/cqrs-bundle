@@ -37,7 +37,7 @@ class RegistryPass implements CompilerPass
         $definition->setArgument(1, $this->context->getQueryRegistryTag());
 
         $container->setDefinition(QueryBus::class, $definition);
-        $container->setAlias(QueryBus::class, $this->context->getQueryBusTag());
+        $container->setAlias($this->context->getQueryBusTag(), QueryBus::class);
     }
 
     /**
@@ -54,7 +54,7 @@ class RegistryPass implements CompilerPass
         $definition->setArgument(1, $this->context->getCommandRegistryTag());
 
         $container->setDefinition(CommandBus::class, $definition);
-        $container->setAlias(CommandBus::class, $this->context->getCommandBusTag());
+        $container->setAlias($this->context->getCommandBusTag(), CommandBus::class);
     }
 
     /**

@@ -65,6 +65,6 @@ class QueryRegistryPass implements CompilerPass
         $definition->setArgument(0, $queryClassMap);
 
         $container->setDefinition(QueryRegistry::class, $definition);
-        $container->setAlias(QueryRegistry::class, $this->context->getQueryRegistryTag());
+        $container->setAlias($this->context->getQueryRegistryTag(), QueryRegistry::class);
     }
 }
