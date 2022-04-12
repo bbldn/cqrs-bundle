@@ -46,6 +46,7 @@ class QueryRegistryPass implements CompilerPass
                 continue;
             }
 
+            /** @var Annotation|null $annotation */
             $annotation = $this->annotationReader->getClassAnnotation($queryReflectionClass, Annotation::class);
             if (null === $annotation) {
                 continue;

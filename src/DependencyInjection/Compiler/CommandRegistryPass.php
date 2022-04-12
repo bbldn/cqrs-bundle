@@ -46,6 +46,7 @@ class CommandRegistryPass implements CompilerPass
                 continue;
             }
 
+            /** @var Annotation|null $annotation */
             $annotation = $this->annotationReader->getClassAnnotation($commandReflectionClass, Annotation::class);
             if (null === $annotation) {
                 continue;
