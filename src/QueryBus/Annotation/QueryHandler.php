@@ -2,12 +2,14 @@
 
 namespace BBLDN\CQRS\QueryBus\Annotation;
 
+use Attribute;
+
 /**
  * @Annotation
  * @Target("CLASS")
  */
 #[Attribute(Attribute::TARGET_CLASS)]
-class QueryHandler
+final class QueryHandler
 {
     public string $class = '';
 }
