@@ -32,12 +32,12 @@ class RegistryPass implements CompilerPass
         $definition = new Definition();
         $definition->setLazy(true);
         $definition->setClass(QueryBusImpl::class);
-        $definition->setTags([$this->context->getQueryBusTag()]);
 
         $definition->setArgument(0, '@kernel');
         $definition->setArgument(1, $this->context->getQueryRegistryTag());
 
         $container->setDefinition(QueryBus::class, $definition);
+        $container->setAlias(QueryBus::class, $this->context->getQueryBusTag());
     }
 
     /**
@@ -48,13 +48,13 @@ class RegistryPass implements CompilerPass
     {
         $definition = new Definition();
         $definition->setLazy(true);
-        $definition->setClass(CommandBus::class);
-        $definition->setTags([$this->context->getCommandBusTag()]);
+        $definition->setClass(CommandBusImpl::class);
 
         $definition->setArgument(0, '@kernel');
         $definition->setArgument(1, $this->context->getCommandRegistryTag());
 
-        $container->setDefinition(CommandBusImpl::class, $definition);
+        $container->setDefinition(CommandBus::class, $definition);
+        $container->setAlias(CommandBus::class, $this->context->getCommandBusTag());
     }
 
     /**
