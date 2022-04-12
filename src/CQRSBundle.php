@@ -8,6 +8,7 @@ use BBLDN\CQRS\QueryBus\QueryBus;
 use BBLDN\CQRS\CommandBus\Command;
 use BBLDN\CQRS\QueryBus\QueryBusImpl;
 use BBLDN\CQRS\CommandBus\CommandBus;
+use BBLDN\CQRS\Helper\AnnotationReader;
 use BBLDN\CQRS\CommandBus\CommandBusImpl;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,6 +24,7 @@ class CQRSBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $context = new Context();
+        $annotationReader = new AnnotationReader();
 
         $container->registerForAutoconfiguration(Query::class)->addTag($context->getQueryTag());
         $container->registerForAutoconfiguration(Command::class)->addTag($context->getCommandTag());
@@ -30,7 +32,7 @@ class CQRSBundle extends Bundle
         $container->autowire(QueryBus::class, QueryBusImpl::class);
         $container->autowire(CommandBus::class, CommandBusImpl::class);
 
-        $container->addCompilerPass(new QueryRegistryPass($context));
-        $container->addCompilerPass(new CommandRegistryPass($context));
+        $container->addCompilerPass(new QueryRegistryPass($context, $annotationReader));
+        $container->addCompilerPass(new CommandRegistryPass($context, $annotationReader));
     }
 }

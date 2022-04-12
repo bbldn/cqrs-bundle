@@ -4,23 +4,30 @@ namespace BBLDN\CQRS\DependencyInjection\Compiler;
 
 use ReflectionException;
 use BBLDN\CQRS\Helper\Context;
+use BBLDN\CQRS\Helper\AnnotationReader;
 use BBLDN\CQRS\CommandBus\CommandRegistry;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use BBLDN\CQRS\CommandBus\Annotation\CommandHandler as CommandHandlerAnnotation;
+use BBLDN\CQRS\CommandBus\Annotation\CommandHandler as Annotation;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface as CompilerPass;
 
 class CommandRegistryPass implements CompilerPass
 {
     private Context $context;
 
+    private AnnotationReader $annotationReader;
+
     /**
      * @param Context $context
+     * @param AnnotationReader $annotationReader
      */
-    public function __construct(Context $context)
+    public function __construct(
+        Context $context,
+        AnnotationReader $annotationReader
+    )
     {
         $this->context = $context;
+        $this->annotationReader = $annotationReader;
     }
 
     /**
@@ -30,8 +37,6 @@ class CommandRegistryPass implements CompilerPass
      */
     public function process(ContainerBuilder $container): void
     {
-        $annotationReader = new AnnotationReader();
-
         $commandClassMap = [];
         $serviceMap = $container->findTaggedServiceIds($this->context->getCommandTag());
         foreach ($serviceMap as $serviceId => $_) {
@@ -41,7 +46,7 @@ class CommandRegistryPass implements CompilerPass
                 continue;
             }
 
-            $annotation = $annotationReader->getClassAnnotation($commandReflectionClass, CommandHandlerAnnotation::class);
+            $annotation = $this->annotationReader->getClassAnnotation($commandReflectionClass, Annotation::class);
             if (null === $annotation) {
                 continue;
             }
@@ -54,6 +59,7 @@ class CommandRegistryPass implements CompilerPass
         }
 
         $definition = new Definition();
+        $definition->setLazy(true);
         $definition->setClass(CommandRegistry::class);
         $definition->setArgument(0, $commandClassMap);
 

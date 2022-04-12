@@ -5,22 +5,29 @@ namespace BBLDN\CQRS\DependencyInjection\Compiler;
 use ReflectionException;
 use BBLDN\CQRS\Helper\Context;
 use BBLDN\CQRS\QueryBus\QueryRegistry;
-use Doctrine\Common\Annotations\AnnotationReader;
+use BBLDN\CQRS\Helper\AnnotationReader;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use BBLDN\CQRS\QueryBus\Annotation\QueryHandler as QueryHandlerAnnotation;
+use BBLDN\CQRS\QueryBus\Annotation\QueryHandler as Annotation;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface as CompilerPass;
 
 class QueryRegistryPass implements CompilerPass
 {
     private Context $context;
 
+    private AnnotationReader $annotationReader;
+
     /**
      * @param Context $context
+     * @param AnnotationReader $annotationReader
      */
-    public function __construct(Context $context)
+    public function __construct(
+        Context $context,
+        AnnotationReader $annotationReader
+    )
     {
         $this->context = $context;
+        $this->annotationReader = $annotationReader;
     }
 
     /**
@@ -30,8 +37,6 @@ class QueryRegistryPass implements CompilerPass
      */
     public function process(ContainerBuilder $container): void
     {
-        $annotationReader = new AnnotationReader();
-
         $queryClassMap = [];
         $serviceMap = $container->findTaggedServiceIds($this->context->getCommandTag());
         foreach ($serviceMap as $serviceId => $_) {
@@ -41,7 +46,7 @@ class QueryRegistryPass implements CompilerPass
                 continue;
             }
 
-            $annotation = $annotationReader->getClassAnnotation($queryReflectionClass, QueryHandlerAnnotation::class);
+            $annotation = $this->annotationReader->getClassAnnotation($queryReflectionClass, Annotation::class);
             if (null === $annotation) {
                 continue;
             }
@@ -54,6 +59,7 @@ class QueryRegistryPass implements CompilerPass
         }
 
         $definition = new Definition();
+        $definition->setLazy(true);
         $definition->setClass(QueryRegistry::class);
         $definition->setArgument(0, $queryClassMap);
 
