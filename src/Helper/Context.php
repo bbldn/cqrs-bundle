@@ -4,15 +4,19 @@ namespace BBLDN\CQRS\Helper;
 
 class Context
 {
-    private string $queryTag;
+    private string $queryTag = 'bbldn.cqrs.query_bus.query';
 
-    private string $commandTag;
+    private string $commandTag = 'bbldn.cqrs.command_bus.command';
 
-    public function __construct()
-    {
-        $this->queryTag = 'bbldn.cqrs.query_bus.query';
-        $this->commandTag = 'bbldn.cqrs.command_bus.command';
-    }
+
+    private string $queryBusTag = 'bbldn.cqrs.query_bus';
+
+    private string $commandBusTag = 'bbldn.cqrs.command_bus';
+
+
+    private string $queryRegistryTag = 'bbldn.cqrs.query_registry';
+
+    private string $commandRegistryTag = 'bbldn.cqrs.command_registry';
 
     /**
      * @return string
@@ -28,5 +32,39 @@ class Context
     public function getCommandTag(): string
     {
         return $this->commandTag;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getQueryBusTag(): string
+    {
+        return $this->queryBusTag;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommandBusTag(): string
+    {
+        return $this->commandBusTag;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getQueryRegistryTag(): string
+    {
+        return $this->queryRegistryTag;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommandRegistryTag(): string
+    {
+        return $this->commandRegistryTag;
     }
 }

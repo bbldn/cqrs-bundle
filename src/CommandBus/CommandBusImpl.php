@@ -6,6 +6,7 @@ use LogicException;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as Container;
+use Symfony\Component\HttpKernel\KernelInterface as Kernel;
 
 class CommandBusImpl implements CommandBus
 {
@@ -14,16 +15,16 @@ class CommandBusImpl implements CommandBus
     private CommandRegistry $commandRegistry;
 
     /**
-     * @param Container $container
+     * @param Kernel $kernel
      * @param CommandRegistry $commandRegistry
      */
     public function __construct(
-        Container $container,
+        Kernel $kernel,
         CommandRegistry $commandRegistry
     )
     {
-        $this->container = $container;
         $this->commandRegistry = $commandRegistry;
+        $this->container = $kernel->getContainer();
     }
 
     /**

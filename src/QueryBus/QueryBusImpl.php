@@ -6,6 +6,7 @@ use LogicException;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as Container;
+use Symfony\Component\HttpKernel\KernelInterface as Kernel;
 
 class QueryBusImpl implements QueryBus
 {
@@ -14,16 +15,16 @@ class QueryBusImpl implements QueryBus
     private QueryRegistry $queryRegistry;
 
     /**
-     * @param Container $container
+     * @param Kernel $kernel
      * @param QueryRegistry $queryRegistry
      */
     public function __construct(
-        Container $container,
+        Kernel $kernel,
         QueryRegistry $queryRegistry
     )
     {
-        $this->container = $container;
         $this->queryRegistry = $queryRegistry;
+        $this->container = $kernel->getContainer();
     }
 
     /**

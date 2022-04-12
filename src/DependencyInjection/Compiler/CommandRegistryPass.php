@@ -63,6 +63,7 @@ class CommandRegistryPass implements CompilerPass
         $definition->setLazy(true);
         $definition->setClass(CommandRegistry::class);
         $definition->setArgument(0, $commandClassMap);
+        $definition->setTags([$this->context->getCommandRegistryTag()]);
 
         $container->setDefinition(CommandRegistry::class, $definition);
     }
