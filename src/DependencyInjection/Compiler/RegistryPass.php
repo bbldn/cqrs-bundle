@@ -7,6 +7,7 @@ use BBLDN\CQRS\QueryBus\QueryBus;
 use BBLDN\CQRS\QueryBus\QueryBusImpl;
 use BBLDN\CQRS\CommandBus\CommandBus;
 use BBLDN\CQRS\CommandBus\CommandBusImpl;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface as CompilerPass;
@@ -33,8 +34,8 @@ class RegistryPass implements CompilerPass
         $definition->setLazy(true);
         $definition->setClass(QueryBusImpl::class);
 
-        $definition->setArgument(0, '@kernel');
-        $definition->setArgument(1, $this->context->getQueryRegistryTag());
+        $definition->setArgument(0, new Reference('kernel'));
+        $definition->setArgument(1, new Reference($this->context->getQueryRegistryTag()));
 
         $container->setDefinition(QueryBus::class, $definition);
         $container->setAlias($this->context->getQueryBusTag(), QueryBus::class);
@@ -50,8 +51,8 @@ class RegistryPass implements CompilerPass
         $definition->setLazy(true);
         $definition->setClass(CommandBusImpl::class);
 
-        $definition->setArgument(0, '@kernel');
-        $definition->setArgument(1, $this->context->getCommandRegistryTag());
+        $definition->setArgument(0, new Reference('kernel'));
+        $definition->setArgument(1, new Reference($this->context->getCommandRegistryTag()));
 
         $container->setDefinition(CommandBus::class, $definition);
         $container->setAlias($this->context->getCommandBusTag(), CommandBus::class);
