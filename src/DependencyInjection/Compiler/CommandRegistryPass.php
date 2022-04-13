@@ -6,7 +6,6 @@ use ReflectionException;
 use BBLDN\CQRS\Helper\Context;
 use BBLDN\CQRS\Helper\AnnotationReader;
 use BBLDN\CQRS\CommandBus\CommandRegistry;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use BBLDN\CQRS\CommandBus\Annotation\CommandHandler as Annotation;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface as CompilerPass;
@@ -59,12 +58,7 @@ class CommandRegistryPass implements CompilerPass
             }
         }
 
-        $definition = new Definition();
-        $definition->setLazy(true);
-        $definition->setClass(CommandRegistry::class);
+        $definition = $container->getDefinition(CommandRegistry::class);
         $definition->setArgument(0, $commandClassMap);
-
-        $container->setDefinition(CommandRegistry::class, $definition);
-        $container->setAlias($this->context->getCommandRegistryTag(), CommandRegistry::class);
     }
 }
