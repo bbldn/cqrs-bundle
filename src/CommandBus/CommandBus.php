@@ -1,6 +1,6 @@
 <?php
 
-namespace BBLDN\CQRS\CommandBus;
+namespace BBLDN\CQRSBundle\CommandBus;
 
 interface CommandBus
 {

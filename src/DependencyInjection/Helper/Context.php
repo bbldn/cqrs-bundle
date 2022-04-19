@@ -1,22 +1,32 @@
 <?php
 
-namespace BBLDN\CQRS\Helper;
+namespace BBLDN\CQRSBundle\DependencyInjection\Helper;
 
 class Context
 {
-    private string $queryTag = 'bbldn.cqrs.query_bus.query';
+    private string $extensionTag = 'bbldn.cqrs_bundle';
 
-    private string $commandTag = 'bbldn.cqrs.command_bus.command';
+    private string $queryTag = 'bbldn.cqrs_bundle.query_bus.query';
 
-
-    private string $queryBusTag = 'bbldn.cqrs.query_bus';
-
-    private string $commandBusTag = 'bbldn.cqrs.command_bus';
+    private string $commandTag = 'bbldn.cqrs_bundle.command_bus.command';
 
 
-    private string $queryRegistryTag = 'bbldn.cqrs.query_registry';
+    private string $queryBusTag = 'bbldn.cqrs_bundle.query_bus';
 
-    private string $commandRegistryTag = 'bbldn.cqrs.command_registry';
+    private string $commandBusTag = 'bbldn.cqrs_bundle.command_bus';
+
+
+    private string $queryRegistryTag = 'bbldn.cqrs_bundle.query_registry';
+
+    private string $commandRegistryTag = 'bbldn.cqrs_bundle.command_registry';
+
+    /**
+     * @return string
+     */
+    public function getExtensionTag(): string
+    {
+        return $this->extensionTag;
+    }
 
     /**
      * @return string

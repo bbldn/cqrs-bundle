@@ -1,6 +1,6 @@
 <?php
 
-namespace BBLDN\CQRS\Helper;
+namespace BBLDN\CQRSBundle\Helper;
 
 use ReflectionClass;
 use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;

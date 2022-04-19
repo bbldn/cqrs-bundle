@@ -1,18 +1,18 @@
 <?php
 
-namespace BBLDN\CQRS\DependencyInjection\Extension;
+namespace BBLDN\CQRSBundle\DependencyInjection\Extension;
 
-use BBLDN\CQRS\Helper\Context;
-use BBLDN\CQRS\QueryBus\Query;
-use BBLDN\CQRS\QueryBus\QueryBus;
-use BBLDN\CQRS\CommandBus\Command;
-use BBLDN\CQRS\QueryBus\QueryBusImpl;
-use BBLDN\CQRS\CommandBus\CommandBus;
-use BBLDN\CQRS\QueryBus\QueryRegistry;
-use BBLDN\CQRS\CommandBus\CommandBusImpl;
-use BBLDN\CQRS\CommandBus\CommandRegistry;
+use BBLDN\CQRSBundle\QueryBus\Query;
+use BBLDN\CQRSBundle\QueryBus\QueryBus;
+use BBLDN\CQRSBundle\CommandBus\Command;
+use BBLDN\CQRSBundle\QueryBus\QueryBusImpl;
+use BBLDN\CQRSBundle\CommandBus\CommandBus;
+use BBLDN\CQRSBundle\QueryBus\QueryRegistry;
+use BBLDN\CQRSBundle\CommandBus\CommandBusImpl;
+use BBLDN\CQRSBundle\CommandBus\CommandRegistry;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
+use BBLDN\CQRSBundle\DependencyInjection\Helper\Context;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
@@ -30,6 +30,8 @@ class BBLCQRSExtension implements ExtensionInterface
 
     /**
      * @return bool
+     *
+     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     public function getNamespace(): bool
     {
@@ -37,7 +39,7 @@ class BBLCQRSExtension implements ExtensionInterface
     }
 
     /**
-     * @return bool
+     * @return false
      */
     public function getXsdValidationBasePath(): bool
     {
@@ -49,7 +51,7 @@ class BBLCQRSExtension implements ExtensionInterface
      */
     public function getAlias(): string
     {
-        return 'bbldn.cqrs';
+        return $this->context->getExtensionTag();
     }
 
     /**
@@ -62,7 +64,7 @@ class BBLCQRSExtension implements ExtensionInterface
         $definition->setLazy(true);
         $definition->setClass(QueryBusImpl::class);
 
-        $definition->setArgument(0, new Reference('kernel'));
+        $definition->setArgument(0, new Reference('service_container'));
         $definition->setArgument(1, new Reference($this->context->getQueryRegistryTag()));
 
         $container->setDefinition(QueryBus::class, $definition);
@@ -79,7 +81,7 @@ class BBLCQRSExtension implements ExtensionInterface
         $definition->setLazy(true);
         $definition->setClass(CommandBusImpl::class);
 
-        $definition->setArgument(0, new Reference('kernel'));
+        $definition->setArgument(0, new Reference('service_container'));
         $definition->setArgument(1, new Reference($this->context->getCommandRegistryTag()));
 
         $container->setDefinition(CommandBus::class, $definition);

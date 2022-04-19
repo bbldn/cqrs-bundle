@@ -1,12 +1,11 @@
 <?php
 
-namespace BBLDN\CQRS\CommandBus;
+namespace BBLDN\CQRSBundle\CommandBus;
 
 use LogicException;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as Container;
-use Symfony\Component\HttpKernel\KernelInterface as Kernel;
 
 class CommandBusImpl implements CommandBus
 {
@@ -15,16 +14,16 @@ class CommandBusImpl implements CommandBus
     private CommandRegistry $commandRegistry;
 
     /**
-     * @param Kernel $kernel
+     * @param Container $container
      * @param CommandRegistry $commandRegistry
      */
     public function __construct(
-        Kernel $kernel,
+        Container $container,
         CommandRegistry $commandRegistry
     )
     {
+        $this->container = $container;
         $this->commandRegistry = $commandRegistry;
-        $this->container = $kernel->getContainer();
     }
 
     /**

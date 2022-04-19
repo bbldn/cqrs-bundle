@@ -1,6 +1,6 @@
 <?php
 
-namespace BBLDN\CQRS\QueryBus\Annotation;
+namespace BBLDN\CQRSBundle\QueryBus\Annotation;
 
 use Attribute;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;

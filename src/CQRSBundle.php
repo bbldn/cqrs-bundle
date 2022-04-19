@@ -1,14 +1,14 @@
 <?php
 
-namespace BBLDN\CQRS;
+namespace BBLDN\CQRSBundle;
 
-use BBLDN\CQRS\Helper\Context;
-use BBLDN\CQRS\Helper\AnnotationReader;
+use BBLDN\CQRSBundle\Helper\AnnotationReader;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use BBLDN\CQRSBundle\DependencyInjection\Helper\Context;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use BBLDN\CQRS\DependencyInjection\Compiler\QueryRegistryPass;
-use BBLDN\CQRS\DependencyInjection\Extension\BBLCQRSExtension;
-use BBLDN\CQRS\DependencyInjection\Compiler\CommandRegistryPass;
+use BBLDN\CQRSBundle\DependencyInjection\Compiler\QueryRegistryPass;
+use BBLDN\CQRSBundle\DependencyInjection\Extension\BBLCQRSExtension;
+use BBLDN\CQRSBundle\DependencyInjection\Compiler\CommandRegistryPass;
 
 class CQRSBundle extends Bundle
 {

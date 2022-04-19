@@ -1,13 +1,13 @@
 <?php
 
-namespace BBLDN\CQRS\DependencyInjection\Compiler;
+namespace BBLDN\CQRSBundle\DependencyInjection\Compiler;
 
 use ReflectionException;
-use BBLDN\CQRS\Helper\Context;
-use BBLDN\CQRS\Helper\AnnotationReader;
-use BBLDN\CQRS\CommandBus\CommandRegistry;
+use BBLDN\CQRSBundle\Helper\AnnotationReader;
+use BBLDN\CQRSBundle\CommandBus\CommandRegistry;
+use BBLDN\CQRSBundle\DependencyInjection\Helper\Context;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use BBLDN\CQRS\CommandBus\Annotation\CommandHandler as Annotation;
+use BBLDN\CQRSBundle\CommandBus\Annotation\CommandHandler as Annotation;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface as CompilerPass;
 
 class CommandRegistryPass implements CompilerPass

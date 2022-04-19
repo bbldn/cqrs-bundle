@@ -1,12 +1,11 @@
 <?php
 
-namespace BBLDN\CQRS\QueryBus;
+namespace BBLDN\CQRSBundle\QueryBus;
 
 use LogicException;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as Container;
-use Symfony\Component\HttpKernel\KernelInterface as Kernel;
 
 class QueryBusImpl implements QueryBus
 {
@@ -15,16 +14,16 @@ class QueryBusImpl implements QueryBus
     private QueryRegistry $queryRegistry;
 
     /**
-     * @param Kernel $kernel
+     * @param Container $container
      * @param QueryRegistry $queryRegistry
      */
     public function __construct(
-        Kernel $kernel,
+        Container $container,
         QueryRegistry $queryRegistry
     )
     {
+        $this->container = $container;
         $this->queryRegistry = $queryRegistry;
-        $this->container = $kernel->getContainer();
     }
 
     /**

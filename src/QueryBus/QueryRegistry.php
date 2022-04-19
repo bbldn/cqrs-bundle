@@ -1,6 +1,6 @@
 <?php
 
-namespace BBLDN\CQRS\QueryBus;
+namespace BBLDN\CQRSBundle\QueryBus;
 
 class QueryRegistry
 {
