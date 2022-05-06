@@ -37,7 +37,7 @@ class QueryRegistryPass implements CompilerPass
     public function process(ContainerBuilder $container): void
     {
         $queryClassMap = [];
-        $serviceMap = $container->findTaggedServiceIds($this->context->getCommandTag());
+        $serviceMap = $container->findTaggedServiceIds($this->context->getQueryTag());
         foreach ($serviceMap as $serviceId => $_) {
             $queryClassName = (string)$container->getDefinition($serviceId)->getClass();
             $queryReflectionClass = $container->getReflectionClass($queryClassName);
