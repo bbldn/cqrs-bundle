@@ -3,13 +3,7 @@
 namespace BBLDN\CQRSBundle\QueryBus\Annotation;
 
 use Attribute;
-use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
-/**
- * @Annotation
- * @Target("CLASS")
- * @NamedArgumentConstructor
- */
 #[Attribute(Attribute::TARGET_CLASS)]
 final class QueryHandler
 {

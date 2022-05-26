@@ -2,11 +2,11 @@
 
 namespace BBLDN\CQRSBundle\DependencyInjection\Extension;
 
-use BBLDN\CQRSBundle\QueryBus\Query;
-use BBLDN\CQRSBundle\QueryBus\QueryBus;
-use BBLDN\CQRSBundle\CommandBus\Command;
+use BBLDN\CQRS\QueryBus\Query;
+use BBLDN\CQRS\QueryBus\QueryBus;
+use BBLDN\CQRS\CommandBus\Command;
+use BBLDN\CQRS\CommandBus\CommandBus;
 use BBLDN\CQRSBundle\QueryBus\QueryBusImpl;
-use BBLDN\CQRSBundle\CommandBus\CommandBus;
 use BBLDN\CQRSBundle\QueryBus\QueryRegistry;
 use BBLDN\CQRSBundle\CommandBus\CommandBusImpl;
 use BBLDN\CQRSBundle\CommandBus\CommandRegistry;

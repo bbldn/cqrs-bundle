@@ -3,6 +3,7 @@
 namespace BBLDN\CQRSBundle\CommandBus;
 
 use LogicException;
+use BBLDN\CQRS\CommandBus\CommandBus;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as Container;
@@ -33,7 +34,7 @@ class CommandBusImpl implements CommandBus
      * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
      */
-    public function execute(object $command)
+    public function execute(object $command): mixed
     {
         $commandClassName = get_class($command);
         if (false === $this->commandRegistry->has($commandClassName)) {

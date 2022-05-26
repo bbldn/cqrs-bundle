@@ -3,6 +3,7 @@
 namespace BBLDN\CQRSBundle\QueryBus;
 
 use LogicException;
+use BBLDN\CQRS\QueryBus\QueryBus;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface as Container;
@@ -32,7 +33,7 @@ class QueryBusImpl implements QueryBus
      * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
      */
-    public function execute(object $query)
+    public function execute(object $query): mixed
     {
         $queryClassName = get_class($query);
         if (false === $this->queryRegistry->has($queryClassName)) {
