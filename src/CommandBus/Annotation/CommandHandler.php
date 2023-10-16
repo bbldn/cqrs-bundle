@@ -2,7 +2,6 @@
 
 namespace BBLDN\CQRSBundle\CommandBus\Annotation;
 
-use Attribute;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
@@ -10,7 +9,6 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
  * @Target("CLASS")
  * @NamedArgumentConstructor
  */
-#[Attribute(Attribute::TARGET_CLASS)]
 final class CommandHandler
 {
     public string $class;

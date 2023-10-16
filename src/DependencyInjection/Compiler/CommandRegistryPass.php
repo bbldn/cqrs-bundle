@@ -23,8 +23,7 @@ class CommandRegistryPass implements CompilerPass
     public function __construct(
         Context $context,
         AnnotationReader $annotationReader
-    )
-    {
+    ) {
         $this->context = $context;
         $this->annotationReader = $annotationReader;
     }

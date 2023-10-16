@@ -23,14 +23,6 @@ class AnnotationReader
      */
     public function getClassAnnotation(ReflectionClass $classReflection, string $annotationName)
     {
-        if (PHP_VERSION_ID >= 80000) {
-            /** @var list<\ReflectionAttribute> $result */
-            $result = $classReflection->getAttributes($annotationName);
-            if (true === key_exists(0, $result)) {
-                return $result[0]->newInstance();
-            }
-        }
-
         return $this->annotationReader->getClassAnnotation($classReflection, $annotationName);
     }
 }

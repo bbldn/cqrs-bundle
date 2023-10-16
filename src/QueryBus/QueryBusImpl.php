@@ -20,8 +20,7 @@ class QueryBusImpl implements QueryBus
     public function __construct(
         Container $container,
         QueryRegistry $queryRegistry
-    )
-    {
+    ) {
         $this->container = $container;
         $this->queryRegistry = $queryRegistry;
     }

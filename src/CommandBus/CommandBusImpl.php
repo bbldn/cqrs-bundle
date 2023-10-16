@@ -20,8 +20,7 @@ class CommandBusImpl implements CommandBus
     public function __construct(
         Container $container,
         CommandRegistry $commandRegistry
-    )
-    {
+    ) {
         $this->container = $container;
         $this->commandRegistry = $commandRegistry;
     }
